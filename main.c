@@ -66,11 +66,12 @@ int main(){
 	unsigned long long i;
 	unsigned long long x = ((rand() % 65536UL) << 48) | ((rand() % 65536UL) << 32) | ((rand() % 65536UL) << 16) | (rand() % 65536);
 	Setup(x);
-
+	#pragma omp parallel
+	{
 	#pragma omp for
 	for(i = 0;i < ULONG_MAX;i++)
 		try_seed(i);
 
-
+	}
 	return 0;
 }
