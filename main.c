@@ -69,9 +69,7 @@ int main(){
 	#pragma omp parallel
 	{
 	#pragma omp for
-	for(i = 0;i < ULONG_MAX;i++)
-		try_seed(i);
-
+	for(i = 0;i < ULONG_MAX;i++) try_seed(i);
 	}
 	return 0;
 }
