@@ -38,38 +38,44 @@ unsigned long long Next(unsigned long long bits){
 				cur = (state >> j) & 15;
 				cur = (cur >> 3) | ((cur >> 2) & 2) | ((cur << 3) & 8) | ((cur << 2) & 4);
 				state ^= cur << j;
-				//printf("%u\n",cur);
 
 			}
-			//exit(1);
 
 		}
-
 	}
 
 	return ret;
 
 }
 
-void try_seed(unsigned long long i){
+void try_seed(unsigned long long i,clock_t t){
 	Setup(i);
 	unsigned long long next1 = Next(64);
+	
 
-	if(next1 == 16594110785577318429UL){
-		unsigned long long next2 = Next(64);
-		if(next2 == 5386378113087067590UL) printf("Found! Seed: %llu",i);
-	}
+	//if(next1 == 16594110785577318429UL){
+		//unsigned long long next2 = Next(64);
+	if(next1 ==  2504125350312446968UL){
+	 printf("Found! Seed: %llu\n",i);
+	//}
+	t = clock() - t;
+	double time_elapsed = ((double)t)/CLOCKS_PER_SEC;
+	printf("%f",time_elapsed);
+	exit(1);
+}
 }
 
 int main(){
-	//srand(time(NULL));
+
 	unsigned long long i;
-	//unsigned long long x = ((rand() % 65536UL) << 48) | ((rand() % 65536UL) << 32) | ((rand() % 65536UL) << 16) | (rand() % 65536);
-	
+
+	clock_t t;
+	t = clock();
 	#pragma omp parallel
 	{
 	#pragma omp for
-	for(i = 0;i < ULONG_MAX;i++) try_seed(i);
+	for(i = 0;i < ULONG_MAX;i++) try_seed(i,t);
 	}
+
 	return 0;
 }
