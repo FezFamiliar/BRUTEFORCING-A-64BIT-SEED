@@ -62,7 +62,7 @@ void try_seed(unsigned long long i){
 }
 
 int main(){
-	srand(time(NULL));
+	//srand(time(NULL));
 	unsigned long long i;
 	//unsigned long long x = ((rand() % 65536UL) << 48) | ((rand() % 65536UL) << 32) | ((rand() % 65536UL) << 16) | (rand() % 65536);
 	
