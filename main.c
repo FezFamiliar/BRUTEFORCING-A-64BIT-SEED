@@ -52,7 +52,7 @@ unsigned long long Next(unsigned long long bits){
 }
 
 void try_seed(unsigned long long i){
-
+	Setup(i);
 	unsigned long long next1 = Next(64);
 
 	if(next1 == 16594110785577318429UL){
@@ -64,8 +64,8 @@ void try_seed(unsigned long long i){
 int main(){
 	srand(time(NULL));
 	unsigned long long i;
-	unsigned long long x = ((rand() % 65536UL) << 48) | ((rand() % 65536UL) << 32) | ((rand() % 65536UL) << 16) | (rand() % 65536);
-	Setup(x);
+	//unsigned long long x = ((rand() % 65536UL) << 48) | ((rand() % 65536UL) << 32) | ((rand() % 65536UL) << 16) | (rand() % 65536);
+	
 	#pragma omp parallel
 	{
 	#pragma omp for
