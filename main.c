@@ -51,18 +51,17 @@ unsigned long long Next(unsigned long long bits){
 void try_seed(unsigned long long i,clock_t t){
 	Setup(i);
 	unsigned long long next1 = Next(64);
-	
 
-	//if(next1 == 16594110785577318429UL){
-		//unsigned long long next2 = Next(64);
-	if(next1 ==  2504125350312446968UL){
+	if(i % 1000000 == 0) printf("%llu\n",i);
+
+
+	if(next1 == 2070212778255396371UL){
 	 printf("Found! Seed: %llu\n",i);
-	//}
-	t = clock() - t;
-	double time_elapsed = ((double)t)/CLOCKS_PER_SEC;
-	printf("%f",time_elapsed);
-	exit(1);
-}
+		t = clock() - t;
+		double time_elapsed = ((double)t)/CLOCKS_PER_SEC;
+		printf("Time: %f",time_elapsed);
+		exit(1);
+	}
 }
 
 int main(){
