@@ -55,8 +55,8 @@ void try_seed(unsigned long long i,clock_t t){
 	if(i % 1000000 == 0) printf("%llu\n",i);
 
 
-	if(next1 == 2070212778255396371UL){
-	 printf("Found! Seed: %llu\n",i);
+	if(next1 == 17012193951318253599UL){
+	        printf("Found! Seed: %llu\n",i);
 		t = clock() - t;
 		double time_elapsed = ((double)t)/CLOCKS_PER_SEC;
 		printf("Time: %f",time_elapsed);
@@ -73,7 +73,7 @@ int main(){
 	#pragma omp parallel
 	{
 	#pragma omp for
-	for(i = 0;i < ULONG_MAX;i++) try_seed(i,t);
+	for(i = 10000000000;i < ULONG_MAX;i++) try_seed(i,t);
 	}
 
 	return 0;
