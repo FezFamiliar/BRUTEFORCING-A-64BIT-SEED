@@ -11,7 +11,7 @@ void Setup(unsigned long long seed){
 	for(int i = 0;i < 16;i++){
 
 		cur = seed & 3;
-		// seed >>= 2; first optimization
+		seed >>= 2;
  		state = (state << 4) | ((state & 3) ^ cur);
 		state |= cur << 2;
 
@@ -48,15 +48,15 @@ unsigned long long Next(unsigned long long bits){
 
 }
 
-void try_seed(unsigned long long i,clock_t t){
+void try_seed(unsigned int i,clock_t t){
 	Setup(i);
 	unsigned long long next1 = Next(64);
 
-	if(i % 1000000 == 0) printf("%llu\n",i);
+	if(i % 1000000 == 0) printf("%u\n",i);
 
 
 	if(next1 == 5697797855707103876UL){
-	        printf("Found! Seed: %llu\n",i);
+	        printf("Found! Seed: %u\n",i);
 		t = clock() - t;
 		double time_elapsed = ((double)t)/CLOCKS_PER_SEC;
 		printf("Time: %f",time_elapsed);
@@ -66,14 +66,15 @@ void try_seed(unsigned long long i,clock_t t){
 
 int main(){
 
-	unsigned long long i;
+	unsigned int i;
+
 
 	clock_t t;
 	t = clock();
 	#pragma omp parallel
 	{
 	#pragma omp for
-	for(i = 0;i < ULONG_MAX;i++) try_seed(i,t);
+	for(i = UINT_MAX;i >= 0;i--) try_seed(i,t);
 	}
 
 	return 0;
